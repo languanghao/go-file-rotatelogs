@@ -13,8 +13,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"bitbucket.org/tebeka/strftime"
 )
 
 func (c clockFn) Now() time.Time {
@@ -93,7 +91,7 @@ func (rl *RotateLogs) genFilename() (string, error) {
 	now := rl.clock.Now()
 	diff := time.Duration(now.UnixNano()) % rl.rotationTime
 	t := now.Add(time.Duration(-1 * diff))
-	str, err := strftime.Format(rl.pattern, t)
+	str, err := Format(rl.pattern, t)
 	if err != nil {
 		return "", err
 	}
